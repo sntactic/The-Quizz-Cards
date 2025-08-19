@@ -1,0 +1,20 @@
+<form [formGroup]="form">
+    <p>
+        Bienvenue sur la page de connection.
+    </p>
+
+    <label [ngStyle]="{'color': color}">{{message}}</label>
+
+    <div>
+        <input type="email" placeholder="Veillez saisir votre email" name="email" id="email" cols="47" rows="2" formControlName="email"/>
+    </div>
+
+    <div>
+        <input type="password" placeholder="Veillez saisir votre mot de passe" name="password" id="password" cols="47" rows="2" formControlName="password"/>
+    </div>
+
+    <div>
+        <button type="submit" (click)="onSubmitForm()" [disabled]="form.invalid">se connecter</button>
+    </div>
+</form>
+

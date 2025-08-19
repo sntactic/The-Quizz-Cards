@@ -1,0 +1,6 @@
+<h2 *ngIf="quizzCards.length === 0">vous n'avez aucune carte !</h2>
+<div class="cards">
+    @for (quizzCard of quizzCards; track $index) {
+        <app-quizz-card [quizzCard]="quizzCard" />
+    }
+</div>

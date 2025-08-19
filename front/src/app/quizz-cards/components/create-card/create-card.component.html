@@ -1,0 +1,110 @@
+<h1>Creer une QuizzCard</h1>
+
+    <!-- <div class="main">
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+            <div class="form">
+                <div class="catdiff">
+                    <div>
+                        <label for="domaine"> domaine </label>
+                        <select name="domaine" [(ngModel)]="domaine">
+                            <option value="science et technologie">science et technologie</option>
+                            <option value="géographie">geographie</option>
+                            <option value="médecine">medecine</option>
+                            <option value="botanique">botanique</option>
+                            <option value="histoire">histoire</option>
+                            <option value="zoo">animale</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="difficulté"> difficulté </label>
+                        <select name="difficulté" id="" [(ngModel)]="difficulte">
+                            <option value="facile">facile</option>
+                            <option value="moyenne">moyenne</option>
+                            <option value="difficile">difficile</option>
+                            <option value="expert">expert</option>
+                            <option value="génie">genie</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="question">saisissez la question</label><br>
+                    <textarea name="question" id="" cols="47" rows="2" [(ngModel)]="question"></textarea>
+                </div>
+
+                <div>
+                    <label for="reponse">saisissez la reponse</label><br>
+                    <textarea name="reponse" id="" cols="47" rows="1" [(ngModel)]="reponse"></textarea>
+                </div>
+
+                <div>
+                    <label for="description  "> rajoutez une explication(<span style="color:red;">optionelle</span>)</label><br>
+                    <textarea name="explication" id="" cols="47" rows="4" [(ngModel)]="explication"></textarea>
+                </div>    
+                
+                <div>
+                    <button type="submit">Créer</button>
+                </div>
+            </div>
+        </form>
+    </div> -->
+<div class="body" *ngIf="isAuth === true">
+    <div class="main">
+        <form [formGroup]="quizzForm">
+            <div class="form">
+                <div class="catdiff">
+                    <div>
+                        <label for="domaine"> domaine(<span style="color:red;">*</span>) </label>
+                        <select name="domaine" id="domaine" formControlName="domaine">
+                            <option value="science et technologie">science et technologie</option>
+                            <option value="geographie">geographie</option>
+                            <option value="medecine">medecine</option>
+                            <option value="botanique">botanique</option>
+                            <option value="histoire">histoire</option>
+                            <option value="animale">animale</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="difficulté"> difficulté(<span style="color:red;">*</span>)</label>
+                        <select name="difficulté" id="categorie" formControlName="difficulte">
+                            <option value="facile">facile</option>
+                            <option value="moyenne">moyenne</option>
+                            <option value="difficile">difficile</option>
+                            <option value="expert">expert</option>
+                            <option value="génie">genie</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="question">saisissez la question(<span style="color:red;">*</span>)</label><br>
+                    <textarea name="question" id="question" cols="47" rows="2" formControlName="question"></textarea>
+                </div>
+
+                <div>
+                    <label for="reponse">saisissez la reponse(<span style="color:red;">*</span>)
+                        <button class="reponse" (click)="onReponse()">générer</button>
+                    </label><br>
+                    <textarea name="reponse" id="reponse" cols="47" rows="1" formControlName="reponse"></textarea>
+                </div>
+
+                <div>
+                    <label for="explication"> rajoutez une explication(<span style="color:red;">optionelle</span>)</label><br>
+                    <textarea name="explication" id="explication" cols="47" rows="4" formControlName="explication"></textarea>
+                </div>
+                
+                <div>
+                    <button class="submit" type="submit" (click)="onSubmitForm()" [disabled]="quizzForm.invalid">Créer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="cards" *ngIf="previewcard$ | async as Card">
+        <app-quizz-card [quizzCard]="Card"/>
+    </div>
+</div>
+
+<h1 style="color: red;" *ngIf="isAuth === false"> Veillez dabord vous connecter!</h1>

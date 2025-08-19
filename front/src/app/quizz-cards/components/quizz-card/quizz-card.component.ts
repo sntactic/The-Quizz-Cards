@@ -1,0 +1,80 @@
+import { CommonModule, DatePipe, NgClass, NgStyle } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { QuizzCardService } from '../../../core/services/quizz-cards-services';
+import { QuizzCard } from '../../../core/templates/quizz-card';
+
+@Component({
+  selector: 'app-quizz-card',
+  imports: [
+    NgStyle,
+    DatePipe,
+    CommonModule,
+    NgClass
+  ],
+  templateUrl: './quizz-card.component.html',
+  styleUrl: './quizz-card.component.scss'
+})
+export class QuizzCardComponent implements OnInit{
+  @Input() quizzCard!:QuizzCard;
+
+  constructor(public route : Router , private quizzcardservice: QuizzCardService, private router:Router){}
+
+  fliped = false
+  cardJson = {
+    id : 0,
+    domaine : "",
+    categorie : "",
+    question : "",
+    reponse : "",
+    explication : "",
+    publication : "privee",
+    date : "",
+    userID : ''
+  };
+
+  getCardJson(card : QuizzCard) : Object{
+    this.cardJson.id = card.id
+    this.cardJson.domaine = card.domaine;
+    this.cardJson.categorie = card.categorie;
+    this.cardJson.question = card.question;
+    this.cardJson.reponse = card.reponse;
+    this.cardJson.explication = card.explication;
+    this.cardJson.publication = card.publication;
+    this.cardJson.date = String(card.date);
+    this.cardJson.userID = card.userID
+
+    return this.cardJson;
+
+  }
+
+  onfliped(){
+    this.fliped = !this.fliped
+  }
+
+  ngOnInit(){
+  }
+
+  onPublier(){
+
+    if(this.quizzCard.publication === "privee"){
+      this.quizzCard.publication = "publique"
+
+    }else{
+      this.quizzCard.publication = "privee"
+    }
+
+    this.quizzcardservice.putCard(this.getCardJson(this.quizzCard)).subscribe();
+  }
+
+  onEdit(){
+    this.router.navigateByUrl("/editcard")
+    this.quizzcardservice.getCardToEdit(this.quizzCard)
+  }
+
+  onDelete(){
+    this.quizzcardservice.deleteCard(this.quizzCard.id).subscribe(message =>{this.router.navigateByUrl('/mycards')});
+
+  }
+  
+}

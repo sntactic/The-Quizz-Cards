@@ -1,0 +1,50 @@
+h2{
+    text-align: center;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr ;
+    gap: 50px;
+    justify-content: space-around;
+    z-index: 2;
+}
+
+.filtre{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    background-color: blue;
+    width: 100%;
+    height: 50px;
+    margin-top: -6px;
+}
+
+@media screen and (max-width: 650px) {
+    .cards{
+        display: flex;
+        flex-wrap: wrap;
+        grid-template-columns:1fr ;
+        justify-content: space-around;
+    }
+}
+
+@media screen and (min-width:651px) and (max-width: 800px) {
+    .cards{
+        display: flex;
+        flex-wrap: wrap;
+        grid-template-columns:1fr;
+        justify-content: space-around;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 940px) {
+    .cards{
+        display: flex;
+        flex-wrap: wrap;
+        grid-template-columns:1fr 1fr;
+        justify-content: space-around;
+    }
+}

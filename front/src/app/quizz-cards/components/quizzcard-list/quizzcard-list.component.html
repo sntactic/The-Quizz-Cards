@@ -1,0 +1,34 @@
+<div class="filtre">
+  <div >
+      <div style="color: white;">filtrer par theme</div>
+      <select (change)="setDomaine($any($event.target).value)">
+        <option value="aleatoire">aléatoire</option>
+        <option value="science et technologie">science et technologie</option>
+        <option value="geographie">geographie</option>
+        <option value="medecine">medecine</option>
+        <option value="botanique">botanique</option>
+        <option value="histoire">histoire</option>
+        <option value="zoo">animale</option>
+    </select>
+  </div>
+
+  <div >
+      <div style="color: white;">filtrer par difficulté</div>
+      <select (change)="setDifficulte($any($event.target).value)">
+        <option value="aléatoire">aléatoire</option>
+        <option value="facile">facile</option>
+        <option value="moyenne">moyenne</option>
+        <option value="difficile">difficile</option>
+        <option value="expert">expert</option>
+        <option value="génie">genie</option>
+    </select>
+  </div>
+</div>
+
+<div class="cards">
+    @for (quizzCard of quizzCards; track $index) {
+      <app-quizz-card [quizzCard]="quizzCard" *ngIf="(quizzCard.categorie===difficulte || difficulte==='aléatoire') 
+      && (quizzCard.domaine===domaine || domaine==='aléatoire')"/>
+    }
+</div>
+

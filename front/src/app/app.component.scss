@@ -1,0 +1,13 @@
+.space-screen{
+    margin-top: 30px;
+    height: 120px;
+    z-index: 2;
+}
+
+@media screen and (max-width:850px) {
+    .space-screen{
+        margin-top: 10px;
+        height: 40px;
+        z-index: 2;
+    }
+}

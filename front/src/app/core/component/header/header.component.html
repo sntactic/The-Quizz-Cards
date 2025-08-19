@@ -1,0 +1,23 @@
+<div class="header" >
+
+    <a class="aimg" href="" routerLink=""><img class="img2" src="assets/app_logo.jpeg" alt=""/></a>
+    <button class="menu" (click)="onClique()"> <img class="img1" [src]="img_menue" alt="" *ngIf="route.url !=='/'"/> </button>
+    <div style="color: white;">The Quizz Cards</div>
+
+    <div class="sign" *ngIf="auth.isAuth === false">
+        <a class="asign" routerLink="sign/in" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <button class="signIn">se connecter</button>
+        </a>
+        <a class="asign" routerLink="sign/up" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <button  class="signUp">s'inscrire</button>
+        </a>
+
+    </div>
+
+    <div class="lg" *ngIf="auth.isAuth === true">
+        <button (click)="onDisconnect()"  class="logOut">deconnecter</button>
+    </div>
+
+</div>
+
+

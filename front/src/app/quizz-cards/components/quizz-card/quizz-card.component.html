@@ -1,0 +1,23 @@
+<div [ngStyle]="{'border':'3px solid '+quizzCard.couleur}" class="quizz-card-front" *ngIf="fliped===false">
+    <div class="theme">{{quizzCard.domaine}}</div>
+    <button (click)="quizzCard.onVoirReponse()">{{quizzCard.etat_repone}}</button>
+    <p [ngStyle]="{background:quizzCard.couleur}" class="categ">{{quizzCard.categorie}}</p>
+    <img [src]="quizzCard.imageUrl" [alt]="quizzCard.domaine" (click)="onfliped()"/>
+    <div class="question"><strong>{{quizzCard.question}}</strong></div>
+    @if (quizzCard.reponse_vue === true) {
+        <p class="reponse">{{quizzCard.reponse}}</p>
+    }@else {<p class="reponse" style="color: black;">???</p>}
+    <div style="position: absolute; bottom: 2px; left: 10px; display: flex; width: 100%;">
+        <div>{{quizzCard.date | date:'d MMMM YYYY à HH:mm'}}</div>
+        <button [ngClass]="{'public': quizzCard.publication ==='publique','prived': quizzCard.publication ==='privee'}" (click)="onPublier()" *ngIf="route.url==='/mycards'" style="position: absolute; right: -10%; bottom: 5px;">
+            {{quizzCard.publication}}
+        </button>
+    </div>
+</div>
+
+<div [ngStyle]="{'border':'3px solid '+quizzCard.couleur}" class="quizz-card-front" (click)="onfliped()" *ngIf="fliped===true">
+    <h1>explication</h1>
+    <img src='assets/delete.jpeg' [alt]="quizzCard.domaine" (click)="onDelete()" style="width: 25px; height: 30px; position: relative; left: 90%; top:-12%;border: 1px solid black;" *ngIf="route.url==='/mycards'" />
+    <img src='assets/edit.jpeg' [alt]="quizzCard.domaine" (click)="onEdit()" style="width: 25px; height: 30px; position: relative; left: 90%; top:-10%;border: 1px solid black;" *ngIf="route.url==='/mycards'"/>
+    <h4 class="desc">{{quizzCard.explication}}</h4>
+</div> 
