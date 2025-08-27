@@ -5,14 +5,16 @@ import { QuizzCardComponent } from '../quizz-card/quizz-card.component';
 import { QuizzCardService } from '../../../core/services/quizz-cards-services';
 import { TopSideBareService } from '../../../core/services/top-side-bare-service';
 import { QuizzCard } from '../../../core/templates/quizz-card';
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 
 @Component({
   selector: 'app-quizzcard-list',
   imports: [
     QuizzCardComponent,
-    CommonModule
-  ],
+    CommonModule,
+    MatToolbarModule
+],
   templateUrl: './quizzcard-list.component.html',
   styleUrl: './quizzcard-list.component.scss'
 })

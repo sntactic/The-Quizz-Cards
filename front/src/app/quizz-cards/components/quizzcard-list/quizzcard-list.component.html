@@ -1,8 +1,8 @@
-<div class="filtre">
+<mat-toolbar class="filtre">
   <div >
       <div style="color: white;">filtrer par theme</div>
       <select (change)="setDomaine($any($event.target).value)">
-        <option value="aleatoire">aléatoire</option>
+        <option value="aléatoire">aléatoire</option>
         <option value="science et technologie">science et technologie</option>
         <option value="geographie">geographie</option>
         <option value="medecine">medecine</option>
@@ -23,7 +23,7 @@
         <option value="génie">genie</option>
     </select>
   </div>
-</div>
+</mat-toolbar>
 
 <div class="cards">
     @for (quizzCard of quizzCards; track $index) {

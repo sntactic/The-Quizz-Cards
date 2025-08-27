@@ -1,15 +1,21 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { Component, OnInit} from '@angular/core';
 import { HeaderService } from '../../services/header-cevice';
 import { RouterLink,RouterLinkActive ,Router} from '@angular/router';
 import { AuthService } from '../../services/auth_service';
+import { MatToolbarModule } from'@angular/material/toolbar'
+import { MatButtonModule } from'@angular/material/button'
+import { MatCardModule } from'@angular/material/card'
 
 @Component({
   selector: 'app-header',
   imports: [
     RouterLink,
     RouterLinkActive,
-    CommonModule
+    CommonModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatCardModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

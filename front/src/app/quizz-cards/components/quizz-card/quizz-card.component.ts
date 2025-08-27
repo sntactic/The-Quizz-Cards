@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuizzCardService } from '../../../core/services/quizz-cards-services';
 import { QuizzCard } from '../../../core/templates/quizz-card';
+import { MatCardModule } from '@angular/material/card'
 
 @Component({
   selector: 'app-quizz-card',
@@ -10,7 +11,8 @@ import { QuizzCard } from '../../../core/templates/quizz-card';
     NgStyle,
     DatePipe,
     CommonModule,
-    NgClass
+    NgClass,
+    MatCardModule
   ],
   templateUrl: './quizz-card.component.html',
   styleUrl: './quizz-card.component.scss'
