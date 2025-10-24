@@ -27,24 +27,24 @@ export class QuizzCardService{
 
 
     getQuizzCardsApi() : Observable<QuizzCard[]>{
-        return this.http.get<QuizzCard[]>('http://localhost:3000/cards');
+        return this.http.get<QuizzCard[]>('http://localhost:9000/cards');
     };
 
     getMyQuizzCardsApi() : Observable<QuizzCard[]>{
-        return this.http.get<QuizzCard[]>(`http://localhost:3000/cards/${this.auth.user.id}`);
+        return this.http.get<QuizzCard[]>(`http://localhost:9000/cards/${this.auth.user.id}`);
     };
 
 
     postCard(card : Object) : Observable<string>{
-        return this.http.post<string>('http://localhost:3000/cards', card);
+        return this.http.post<string>('http://localhost:9000/cards', card);
     };
 
     putCard(card : object) : Observable<string>{
-        return this.http.put<string>('http://localhost:3000/cards', card);
+        return this.http.put<string>('http://localhost:9000/cards', card);
     };
 
     deleteCard(id : number) : Observable<string>{
-        return this.http.delete<string>(`http://localhost:3000/cards/${id}`);
+        return this.http.delete<string>(`http://localhost:9000/cards/${id}`);
     };
 
 }

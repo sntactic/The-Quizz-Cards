@@ -8,5 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface CardRepository extends MongoRepository<Card , String> {
-    public Optional<Iterable<Card>> findByuserID(String id);
+  public Optional<Iterable<Card>> findByuserID(String id);
+
+  public Optional<Card> findById(String id);
 }

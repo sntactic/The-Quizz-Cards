@@ -17,8 +17,8 @@
             </div>
         </mat-card>
 
-        <mat-card [ngStyle]="{'border':'3px solid '+quizzCard.couleur}" class="quizz-card-back" (click)="onfliped()" *ngIf="fliped===true">
-            <h1>explication</h1>
+        <mat-card [ngStyle]="{'border':'3px solid '+quizzCard.couleur}" class="quizz-card-back" *ngIf="fliped===true">
+            <h1 (click)="onfliped()">explication</h1>
             <img src='assets/delete.jpeg' [alt]="quizzCard.domaine" (click)="onDelete()" style="width: 25px; height: 30px; position: relative; left: 90%; top:-12%;border: 1px solid black;" *ngIf="route.url==='/mycards'" />
             <img src='assets/edit.jpeg' [alt]="quizzCard.domaine" (click)="onEdit()" style="width: 25px; height: 30px; position: relative; left: 90%; top:-10%;border: 1px solid black;" *ngIf="route.url==='/mycards'"/>
             <h4 class="desc">{{quizzCard.explication}}</h4>

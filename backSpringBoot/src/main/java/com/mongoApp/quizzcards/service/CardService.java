@@ -22,11 +22,7 @@ public class CardService {
         return cardRepository.findByuserID(id).orElse(null);
     }
 
-    public void updateCard(){
+    public void deleteCard(String id){ cardRepository.deleteById(id); }
 
-    }
-
-    public void deleteCard(String id){
-
-    }
+    public Card findById(String id){ return cardRepository.findById(id).orElse(null); }
 }
