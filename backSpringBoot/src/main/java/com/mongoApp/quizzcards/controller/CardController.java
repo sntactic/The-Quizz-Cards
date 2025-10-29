@@ -10,9 +10,14 @@ public class CardController {
   @Autowired
   private CardService cardService;
 
-  @GetMapping("/cards")
+  @GetMapping("/allcards")
   public Iterable<Card> getAllCards() {
     return cardService.getAllCards();
+  }
+
+  @GetMapping("/test")
+  public String success(){
+    return "SUCCES";
   }
 
   @GetMapping("/cards/{userID}")

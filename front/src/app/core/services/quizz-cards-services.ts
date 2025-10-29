@@ -27,7 +27,7 @@ export class QuizzCardService{
 
 
     getQuizzCardsApi() : Observable<QuizzCard[]>{
-        return this.http.get<QuizzCard[]>('http://localhost:9000/cards');
+        return this.http.get<QuizzCard[]>('http://localhost:9000/allcards');
     };
 
     getMyQuizzCardsApi() : Observable<QuizzCard[]>{

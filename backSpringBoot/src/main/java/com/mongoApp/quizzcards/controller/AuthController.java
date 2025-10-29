@@ -1,17 +1,20 @@
 package com.mongoApp.quizzcards.controller;
-
-import org.springframework.web.bind.annotation.GetMapping;
+import com.mongoApp.quizzcards.service.JWTService;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+
+@RestController()
 public class AuthController {
-  @GetMapping("/user")
-  public String getUser(){
-    return "welcome , user";
+  public JWTService jwtService;
+
+  public AuthController(JWTService jwtService){
+    this.jwtService = jwtService;
   }
 
-  @GetMapping("/admin")
-  public String getAdmin(){
-    return "welcome , admin";
+  @PostMapping("/login")
+  public String getToken(Authentication authentication){
+    return jwtService.generateToken(authentication);
   }
 }

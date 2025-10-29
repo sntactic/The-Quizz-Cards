@@ -1,5 +1,6 @@
 package com.mongoApp.quizzcards.service;
 
+import com.mongoApp.quizzcards.model.CustomUserDetails;
 import com.mongoApp.quizzcards.model.User;
 import com.mongoApp.quizzcards.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = userRepository.findByMail(username);
+    User user = userRepository.findByEmail(username);
 
-    return new org.springframework.security.core.userdetails.User(user.getMail() , user.getPassword() , getGrantedAuthorities(user.getRole()));
+    return new CustomUserDetails(
+      user.getId(),
+      user.getName(),
+      user.getEmail(),
+      user.getPassword(),
+      getGrantedAuthorities(user.getRole())
+    );
   }
 
   private List<GrantedAuthority> getGrantedAuthorities(String role) {

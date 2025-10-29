@@ -3,14 +3,18 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../../core/services/auth_service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-sign-in-page',
   imports: [
     ReactiveFormsModule,
-    CommonModule
-  ],
+    CommonModule,
+    MatIconModule,
+    MatButtonModule
+],
   templateUrl: './sign-in-page.component.html',
   styleUrl: './sign-in-page.component.scss'
 })
@@ -34,8 +38,8 @@ export class SignInPageComponent implements OnInit{
   
 
   onSubmitForm(){
-    this.auth.signIn(this.form.value).subscribe(user => {
-      const token = user.token;
+    this.auth.signIn(this.form.value.email , this.form.value.password) .subscribe(token => {
+      console.log(token);
       this.auth.initToken(token);
       if(this.auth.user){
         this.color = 'green'

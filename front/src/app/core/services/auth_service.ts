@@ -1,6 +1,6 @@
 import { User } from './../templates/user';
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import {jwtDecode} from 'jwt-decode';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 interface MyTokenPayload {
     userID: string;
-    name : string;
+    userName : string;
     email : string;
     iat: number;
     exp: number;
@@ -26,12 +26,22 @@ export class AuthService{
     constructor(private http:HttpClient, private router : Router){};
 
     signUp(user : Object) : Observable<Object>{
-        return this.http.post<Object>('http://localhost:3000/users/signup' , user);
+        return this.http.get<Object>('http://localhost:3000/users/signup' , user);
     };
 
-    signIn(user : Object) : Observable< {user: any, token: string }>{
-        return this.http.post<{user: any, token: string }>('http://localhost:3000/users/signin' , user);
-    };
+    signIn(email: string, password: string): Observable<string> {
+        const credentials = btoa(`${email}:${password}`);
+
+        const headers = new HttpHeaders({
+            'Authorization': `Basic ${credentials}`
+        });
+
+        return this.http.post('http://localhost:9000/login',
+            {},
+            { headers, responseType: 'text'}
+        )
+    }
+
 
     getToken(): string{
         return this.token;
@@ -47,7 +57,8 @@ export class AuthService{
         this.token = token;
         localStorage.setItem("token", token);
         const payload = jwtDecode<MyTokenPayload>(token);
-        const newUser = new User(payload.userID,payload.name,payload.email);
+        const newUser = new User(payload.userID,payload.userName,payload.email);
+        console.log(newUser);
         this.user = newUser;
         this.isAuth = true;
     }

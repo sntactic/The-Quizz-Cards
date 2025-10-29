@@ -10,7 +10,7 @@ public class User {
     @Id
     private String id;
     private String name;
-    private String mail;
+    private String email;
     private String password;
     private String role;
 }

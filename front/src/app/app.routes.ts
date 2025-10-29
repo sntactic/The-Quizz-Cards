@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { MyCardsResolver } from './quizz-cards/resolver/myCards.resolver';
+import { AuthCallbackComponent } from './auth/auth-callback/auth-callback.component';
 
 export const routes: Routes = [
     {path:'quizzcards/:id',
@@ -30,6 +31,10 @@ export const routes: Routes = [
     {path : 'sign',
         loadChildren:() => import('./annex-pages/sign.routing')
         .then(m => m.routes)
-    }
+    },
+    {
+    path: 'auth/callback',
+    component: AuthCallbackComponent
+    },
 
 ];
