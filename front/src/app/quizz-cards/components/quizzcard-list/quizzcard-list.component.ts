@@ -6,6 +6,7 @@ import { QuizzCardService } from '../../../core/services/quizz-cards-services';
 import { TopSideBareService } from '../../../core/services/top-side-bare-service';
 import { QuizzCard } from '../../../core/templates/quizz-card';
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class QuizzcardListComponent implements OnInit, OnDestroy{
   domaine!:string;
   private destroy$!: Subject<boolean>
 
-  constructor(private quizzCardService: QuizzCardService , private topSideBareService: TopSideBareService,){}
+  constructor(private quizzCardService: QuizzCardService , private topSideBareService: TopSideBareService , private router : Router){}
 
   ngOnInit(): void {
 
@@ -41,7 +42,7 @@ export class QuizzcardListComponent implements OnInit, OnDestroy{
     this.quizzCards$ = this.quizzCardService.getQuizzCardsApi();
 
     this.quizzCards$.subscribe(cards => {
-      this.quizzCards = cards.filter(card => card.publication === 'publique' ).map(card =>
+      this.quizzCards = cards.filter(card => card.publication === 'publique' || this.router.url==="/adminpage").map(card =>
         new QuizzCard(card.id, card.domaine, card.categorie, card.question, card.reponse, card.explication, card.publication , card.date? card.date : new Date(),card.userID)
       );
     });

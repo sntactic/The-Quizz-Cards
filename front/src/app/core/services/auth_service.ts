@@ -10,6 +10,7 @@ interface MyTokenPayload {
     userID: string;
     userName : string;
     email : string;
+    roles : string[];
     iat: number;
     exp: number;
 }
@@ -47,6 +48,10 @@ export class AuthService{
         return this.token;
     }
 
+    getUser(): User{
+        return this.user;
+    }
+
     onDisonnected(){
         this.isAuth = false;
         localStorage.removeItem("token");
@@ -57,8 +62,7 @@ export class AuthService{
         this.token = token;
         localStorage.setItem("token", token);
         const payload = jwtDecode<MyTokenPayload>(token);
-        const newUser = new User(payload.userID,payload.userName,payload.email);
-        console.log(newUser);
+        const newUser = new User(payload.userID,payload.userName,payload.email, payload.roles);
         this.user = newUser;
         this.isAuth = true;
     }

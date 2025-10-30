@@ -1,3 +1,5 @@
+import { User } from './../../../core/templates/user';
+import { AuthService } from './../../../core/services/auth_service';
 import { CommonModule, DatePipe, NgClass, NgStyle } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,8 +21,9 @@ import { MatCardModule } from '@angular/material/card'
 })
 export class QuizzCardComponent implements OnInit{
   @Input() quizzCard!:QuizzCard;
+  isAdmin=false;
 
-  constructor(public route : Router , private quizzcardservice: QuizzCardService, private router:Router){}
+  constructor(public route : Router , private quizzcardservice: QuizzCardService, private router:Router , private authService: AuthService){}
 
   fliped = false
   cardJson = {
@@ -55,6 +58,9 @@ export class QuizzCardComponent implements OnInit{
   }
 
   ngOnInit(){
+    if(this.authService.getUser() && this.authService.getUser().roles.includes('ROLE_ADMIN')){
+      this.isAdmin = true;
+    }
   }
 
   onPublier(){

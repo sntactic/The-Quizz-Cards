@@ -33,8 +33,13 @@ export const routes: Routes = [
         .then(m => m.routes)
     },
     {
-    path: 'auth/callback',
-    component: AuthCallbackComponent
+        path: 'auth/callback',
+        component: AuthCallbackComponent
     },
+    {
+        path: 'adminpage',
+        loadComponent: () => import('./quizz-cards/components/admin-page/admin-page.component')
+            .then(m => m.AdminPageComponent)
+    }
 
 ];

@@ -11,7 +11,7 @@
             }@else {<p class="reponse" style="color: black;">???</p>}
             <div style="position: absolute; bottom: 2px; left: 10px; display: flex; width: 100%;">
                 <div>{{quizzCard.date | date:'d MMMM YYYY à HH:mm'}}</div>
-                <button [ngClass]="{'public': quizzCard.publication ==='publique','prived': quizzCard.publication ==='privee'}" (click)="onPublier()" *ngIf="route.url==='/mycards'" style="position: absolute; right: -10%; bottom: 5px;">
+                <button [ngClass]="{'public': quizzCard.publication ==='publique','prived': quizzCard.publication ==='privee'}" (click)="onPublier()" *ngIf="route.url==='/mycards' || (route.url==='/adminpage' && isAdmin)" style="position: absolute; right: -10%; bottom: 5px;">
                     {{quizzCard.publication}}
                 </button>
             </div>
@@ -19,8 +19,8 @@
 
         <mat-card [ngStyle]="{'border':'3px solid '+quizzCard.couleur}" class="quizz-card-back" *ngIf="fliped===true">
             <h1 (click)="onfliped()">explication</h1>
-            <img src='assets/delete.jpeg' [alt]="quizzCard.domaine" (click)="onDelete()" style="width: 25px; height: 30px; position: relative; left: 90%; top:-12%;border: 1px solid black;" *ngIf="route.url==='/mycards'" />
-            <img src='assets/edit.jpeg' [alt]="quizzCard.domaine" (click)="onEdit()" style="width: 25px; height: 30px; position: relative; left: 90%; top:-10%;border: 1px solid black;" *ngIf="route.url==='/mycards'"/>
+            <img src='assets/delete.jpeg' [alt]="quizzCard.domaine" (click)="onDelete()" style="width: 25px; height: 30px; position: relative; left: 90%; top:-12%;border: 1px solid black;" *ngIf="route.url==='/mycards' || (route.url==='/adminpage' && isAdmin)" />
+            <img src='assets/edit.jpeg' [alt]="quizzCard.domaine" (click)="onEdit()" style="width: 25px; height: 30px; position: relative; left: 90%; top:-10%;border: 1px solid black;" *ngIf="route.url==='/mycards' || (route.url==='/adminpage' && isAdmin)"/>
             <h4 class="desc">{{quizzCard.explication}}</h4>
         </mat-card>
     </div>
