@@ -1,6 +1,6 @@
 package com.mongoApp.quizzcards.service;
 
-import com.mongoApp.quizzcards.model.CustomUserDetails;
+import com.mongoApp.quizzcards.dto.CustomUserDetails;
 import com.mongoApp.quizzcards.model.User;
 import com.mongoApp.quizzcards.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -53,13 +53,7 @@ public class OAuth2LoginSuccessService implements AuthenticationSuccessHandler {
       List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
     );
 
-    Authentication auth = new UsernamePasswordAuthenticationToken(
-      userDetails,
-      null,
-      userDetails.getAuthorities()
-    );
-
-    String token = jwtService.generateToken(auth);
+    String token = jwtService.generateToken(userDetails);
 
     response.sendRedirect("http://localhost:4200/auth/callback?token=" + token);
   }

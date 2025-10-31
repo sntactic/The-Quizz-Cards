@@ -38,13 +38,12 @@ export class SignInPageComponent implements OnInit{
   
 
   onSubmitForm(){
-    this.auth.signIn(this.form.value.email , this.form.value.password) .subscribe(token => {
-      console.log(token);
-      this.auth.initToken(token);
+    this.auth.signIn(this.form.value.email , this.form.value.password) .subscribe(authRespose => {
+      console.log(authRespose);
+      this.auth.initToken(authRespose.token , "createcard");
       if(this.auth.user){
         this.color = 'green'
         this.message = 'connection reusie'
-        this.router.navigateByUrl('/createcard')
       }else{
         this.color = 'red'
         this.message = 'la connection a echouee'

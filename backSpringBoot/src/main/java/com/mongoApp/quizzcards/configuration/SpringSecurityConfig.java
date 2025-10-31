@@ -3,7 +3,6 @@ package com.mongoApp.quizzcards.configuration;
 import com.mongoApp.quizzcards.service.CustomUserDetailsService;
 import com.mongoApp.quizzcards.service.OAuth2LoginSuccessService;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -32,8 +31,6 @@ import java.nio.charset.StandardCharsets;
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
-  @Autowired
-  CustomUserDetailsService customUserDetailsService;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http , OAuth2LoginSuccessService oAuth2LoginSuccessService) throws Exception {
@@ -43,15 +40,14 @@ public class SpringSecurityConfig {
       .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(auth -> auth
         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // autorise les preflight requests
-        .requestMatchers("/allcards" , "/login" , "signup").permitAll()
+        .requestMatchers("/allcards" , "/login" , "/signup").permitAll()
+        .requestMatchers("/test").hasRole("ADMIN")
         .anyRequest().authenticated()
       )
-      .httpBasic(Customizer.withDefaults())
+      .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
       .oauth2Login(oauth2 -> oauth2
         .successHandler(oAuth2LoginSuccessService)
       )
-      .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
-
       .build();
   }
 
@@ -69,7 +65,7 @@ public class SpringSecurityConfig {
   }
 
   @Bean
-  public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+  public AuthenticationManager authenticationManager(HttpSecurity http , CustomUserDetailsService customUserDetailsService) throws Exception {
     AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
     authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
     return authenticationManagerBuilder.build();

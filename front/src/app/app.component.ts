@@ -41,7 +41,7 @@ export class AppComponent implements OnInit
     const token  = localStorage.getItem("token");
     if (token) {
       if (this.isTokenValid(token)){
-        this.auth.initToken(token);
+        this.auth.initToken(token , "quizzcards");
       }else{
         localStorage.removeItem("token");
       }

@@ -42,9 +42,21 @@ onSubmitForm(){
     this.message = "email invalide!"
   }else{
     this.color = "green"
-    this.auth.signUp(this.form.value).subscribe(res => {
-      console.log(res);
-      this.message = "s'incription reussie!"
+    this.auth.signUp(this.form.value).subscribe({
+      next: (res) => {
+        if (res === "exist"){
+          this.color = "red"
+          this.message = "Cet email est déjà utilisé!"
+        }else{
+          this.color = "green"
+          this.message = "Inscription réussie! Connection en cours..."
+          setTimeout(() => {this.auth.initToken(res , "createcard")}, 2000);
+        }
+      },
+      error: (err) => {
+        this.color = "red"
+        this.message = "Erreur lors de l'inscription. Veuillez réessayer."
+      }
     })
   }
 }

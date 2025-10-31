@@ -1,7 +1,6 @@
 package com.mongoApp.quizzcards.service;
 
-import com.mongoApp.quizzcards.model.CustomUserDetails;
-import org.springframework.security.core.Authentication;
+import com.mongoApp.quizzcards.dto.CustomUserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
@@ -22,8 +21,7 @@ public class JWTService {
     this.jwtEncoder = jwtEncoder;
   }
 
-  public String generateToken(Authentication authentication) {
-    CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
+  public String generateToken(CustomUserDetails user) {
     Instant now = Instant.now();
 
     JwtClaimsSet claims = JwtClaimsSet.builder()

@@ -1,4 +1,4 @@
-package com.mongoApp.quizzcards.model;
+package com.mongoApp.quizzcards.dto;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

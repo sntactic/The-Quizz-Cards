@@ -24,8 +24,7 @@ export class AuthCallbackComponent implements OnInit {
       const token = params['token'];
       
       if (token) {
-        this.authService.initToken(token);
-        this.router.navigateByUrl('/createcard');
+        this.authService.initToken(token , "createcard");
         // setTimeout(() => {
         //   this.loading = false;
         //   // Rediriger vers la page principale

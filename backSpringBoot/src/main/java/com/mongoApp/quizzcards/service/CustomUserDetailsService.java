@@ -1,6 +1,6 @@
 package com.mongoApp.quizzcards.service;
 
-import com.mongoApp.quizzcards.model.CustomUserDetails;
+import com.mongoApp.quizzcards.dto.CustomUserDetails;
 import com.mongoApp.quizzcards.model.User;
 import com.mongoApp.quizzcards.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

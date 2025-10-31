@@ -15,6 +15,11 @@ interface MyTokenPayload {
     exp: number;
 }
 
+interface AuthResponse {
+    token: string;
+    type: string;
+}
+
 @Injectable({
     providedIn : 'root'
 })
@@ -26,21 +31,16 @@ export class AuthService{
 
     constructor(private http:HttpClient, private router : Router){};
 
-    signUp(user : Object) : Observable<Object>{
-        return this.http.get<Object>('http://localhost:3000/users/signup' , user);
+    signUp(user : Object) : Observable<string>{
+        return this.http.post('http://localhost:9000/signup' , user, {responseType : 'text'});
     };
 
-    signIn(email: string, password: string): Observable<string> {
-        const credentials = btoa(`${email}:${password}`);
-
-        const headers = new HttpHeaders({
-            'Authorization': `Basic ${credentials}`
-        });
-
-        return this.http.post('http://localhost:9000/login',
-            {},
-            { headers, responseType: 'text'}
-        )
+    signIn(email: string, password: string): Observable<any> {
+        return this.http.post(
+            'http://localhost:9000/login',
+            { username: email, password: password },
+            { responseType: 'json' }
+        );
     }
 
 
@@ -58,12 +58,14 @@ export class AuthService{
         this.router.navigateByUrl('/quizzcards')
     }
 
-    initToken(token : string){
+    initToken(token : string , route : string){
         this.token = token;
         localStorage.setItem("token", token);
         const payload = jwtDecode<MyTokenPayload>(token);
         const newUser = new User(payload.userID,payload.userName,payload.email, payload.roles);
         this.user = newUser;
         this.isAuth = true;
+        this.router.navigateByUrl(route)
+
     }
 }
