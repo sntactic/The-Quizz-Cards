@@ -18,11 +18,11 @@ export class AdminPageComponent {
   isAdmin: boolean = false;
 
   ngOnInit(){
-    if(!this.authService.getUser() || !this.authService.getUser().roles?.includes('ROLE_ADMIN')){
-      this.router.navigateByUrl('/quizzcards');
-    }
     if(this.authService.getUser() && this.authService.getUser().roles?.includes('ROLE_ADMIN')){
       this.isAdmin = true;
+    }
+    if(!this.authService.getUser() || !this.authService.getUser().roles?.includes('ROLE_ADMIN')){
+      this.router.navigateByUrl('/quizzcards');
     }
   }
 }

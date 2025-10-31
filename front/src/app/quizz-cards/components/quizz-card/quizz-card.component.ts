@@ -22,6 +22,7 @@ import { MatCardModule } from '@angular/material/card'
 export class QuizzCardComponent implements OnInit{
   @Input() quizzCard!:QuizzCard;
   isAdmin=false;
+  isDeleted=false;
 
   constructor(public route : Router , private quizzcardservice: QuizzCardService, private router:Router , private authService: AuthService){}
 
@@ -81,7 +82,9 @@ export class QuizzCardComponent implements OnInit{
   }
 
   onDelete(){
-    this.quizzcardservice.deleteCard(this.quizzCard.id).subscribe(message =>{this.router.navigateByUrl('/mycards')});
+    this.quizzcardservice.deleteCard(this.quizzCard.id).subscribe(message =>{
+      this.isDeleted = true;
+    });
 
   }
   

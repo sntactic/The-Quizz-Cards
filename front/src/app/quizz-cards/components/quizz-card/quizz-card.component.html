@@ -1,4 +1,4 @@
-<div class="flip" [class.is-flipped]="fliped">
+<div class="flip" [class.is-flipped]="fliped" *ngIf="!isDeleted">
     <div class="flipper">
         <mat-card [ngStyle]="{'border':'3px solid '+quizzCard.couleur}" class="quizz-card-front" *ngIf="fliped===false">
             <div class="theme">{{quizzCard.domaine}}</div>
@@ -17,8 +17,8 @@
             </div>
         </mat-card>
 
-        <mat-card [ngStyle]="{'border':'3px solid '+quizzCard.couleur}" class="quizz-card-back" *ngIf="fliped===true">
-            <h1 (click)="onfliped()">explication</h1>
+        <mat-card [ngStyle]="{'border':'3px solid '+quizzCard.couleur}" class="quizz-card-back" *ngIf="fliped===true" (click)="onfliped()">
+            <h1 >explication</h1>
             <img src='assets/delete.jpeg' [alt]="quizzCard.domaine" (click)="onDelete()" style="width: 25px; height: 30px; position: relative; left: 90%; top:-12%;border: 1px solid black;" *ngIf="route.url==='/mycards' || (route.url==='/adminpage' && isAdmin)" />
             <img src='assets/edit.jpeg' [alt]="quizzCard.domaine" (click)="onEdit()" style="width: 25px; height: 30px; position: relative; left: 90%; top:-10%;border: 1px solid black;" *ngIf="route.url==='/mycards' || (route.url==='/adminpage' && isAdmin)"/>
             <h4 class="desc">{{quizzCard.explication}}</h4>
