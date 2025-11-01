@@ -1,0 +1,18 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+    <div *ngIf="trouve === 'yes'" class="flex justify-center">
+      <app-quizz-card [quizzCard]="quizzCard"></app-quizz-card>
+    </div>
+
+    <div *ngIf="trouve === ''" class="bg-white rounded-2xl shadow-xl p-12 text-center">
+      <div class="text-6xl mb-4">😕</div>
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">Carte inexistante !</h2>
+      <p class="text-gray-600 mb-6">La carte que vous recherchez n'existe pas ou a été supprimée.</p>
+      <a 
+        routerLink="/quizzcards"
+        class="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors">
+        Retour aux cartes
+      </a>
+    </div>
+  </div>
+</div>
