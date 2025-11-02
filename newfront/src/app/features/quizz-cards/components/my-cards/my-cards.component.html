@@ -17,7 +17,7 @@
     <!-- Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" *ngIf="quizzCards.length > 0">
       @for (quizzCard of quizzCards; track $index) {
-        <app-quizz-card [quizzCard]="quizzCard" />
+        <app-quizz-card appAnimateOnVisible="animate-fade-in" [quizzCard]="quizzCard" />
       }
     </div>
   </div>

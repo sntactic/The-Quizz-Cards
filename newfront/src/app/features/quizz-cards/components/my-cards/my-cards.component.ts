@@ -6,6 +6,7 @@ import { QuizzCardService } from '../../../../core/services/quizz-card.service';
 import { QuizzCard } from '../../../../shared/models/quizz-card.model';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { AnimateOnVisibleDirective } from '../../../../core/directives/AnimationOnVisible.directive';
 
 @Component({
   selector: 'app-my-cards',
@@ -13,7 +14,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   imports: [
     QuizzCardComponent,
     CommonModule,
-    RouterLink
+    RouterLink,
+    AnimateOnVisibleDirective
   ],
   templateUrl: './my-cards.component.html',
   styleUrl: './my-cards.component.scss'

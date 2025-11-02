@@ -7,6 +7,7 @@ import { FilterService } from '../../../../core/services/filter.service';
 import { QuizzCard } from '../../../../shared/models/quizz-card.model';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
+import { AnimateOnVisibleDirective } from '../../../../core/directives/AnimationOnVisible.directive';
 
 @Component({
   selector: 'app-quizzcard-list',
@@ -14,7 +15,8 @@ import { Router } from '@angular/router';
   imports: [
     QuizzCardComponent,
     CommonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    AnimateOnVisibleDirective
   ],
   templateUrl: './quizzcard-list.component.html',
   styleUrl: './quizzcard-list.component.scss'

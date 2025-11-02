@@ -1,5 +1,5 @@
 <!-- Filter Toolbar -->
-<div class="fixed top-28 md:top-16 left-0 right-0 bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg z-20 py-4">
+<div class="fixed  md:top-110 left-0 right-0 bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg z-20 py-4">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
       <!-- Domain Filter -->
@@ -7,7 +7,7 @@
         <label class="text-white font-semibold text-sm">Filtrer par thème:</label>
         <select 
           (change)="setDomaine($any($event.target).value)"
-          class="px-4 py-2 rounded-lg border border-white/30 bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all backdrop-blur-sm">
+          class="px-5 py-2 rounded-lg border border-white/30 bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all backdrop-blur-sm">
           <option value="aléatoire" class="text-gray-800">Aléatoire</option>
           <option value="science et technologie" class="text-gray-800">Science et technologie</option>
           <option value="geographie" class="text-gray-800">Géographie</option>
@@ -19,11 +19,11 @@
       </div>
 
       <!-- Difficulty Filter -->
-      <div class="flex items-center space-x-3">
+      <div class="flex items-center space-x-5">
         <label class="text-white font-semibold text-sm">Filtrer par difficulté:</label>
         <select 
           (change)="setDifficulte($any($event.target).value)"
-          class="px-4 py-2 rounded-lg border border-white/30 bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all backdrop-blur-sm">
+          class="px-16 py-2 rounded-lg border border-white/30 bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all backdrop-blur-sm">
           <option value="aléatoire" class="text-gray-800">Aléatoire</option>
           <option value="facile" class="text-gray-800">Facile</option>
           <option value="moyenne" class="text-gray-800">Moyenne</option>
@@ -41,7 +41,7 @@
   <div class="max-w-7xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       @for (quizzCard of quizzCards; track $index) {
-        <app-quizz-card 
+        <app-quizz-card appAnimateOnVisible="animate-fade-in"
           *ngIf="(quizzCard.categorie===difficulte || difficulte==='aléatoire') && (quizzCard.domaine===domaine || domaine==='aléatoire')"
           [quizzCard]="quizzCard" />
       }
