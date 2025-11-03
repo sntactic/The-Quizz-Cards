@@ -26,10 +26,11 @@ export class QuizzcardListComponent implements OnInit, OnDestroy {
   quizzCards$!: Observable<QuizzCard[]>;
   difficulte!: string;
   domaine!: string;
+  quizzCardLsength =0
   private destroy$!: Subject<boolean>;
 
   constructor(
-    private quizzCardService: QuizzCardService,
+    public quizzCardService: QuizzCardService,
     private filterService: FilterService,
     private router: Router
   ) {}
@@ -48,6 +49,7 @@ export class QuizzcardListComponent implements OnInit, OnDestroy {
     this.quizzCards$ = this.quizzCardService.getQuizzCardsApi();
 
     this.quizzCards$.subscribe(cards => {
+      this.quizzCardLsength = cards.length;
       this.quizzCards = cards.filter(
         card => card.publication === 'publique' || this.router.url === '/adminpage'
       ).map(card =>

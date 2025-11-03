@@ -23,10 +23,10 @@ export class AdminPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.authService.getUser() && this.authService.getUser().roles?.includes('ROLE_ADMIN')) {
+    if (this.authService.getUser() && this.authService.getUser()?.roles?.includes('ROLE_ADMIN')) {
       this.isAdmin = true;
     }
-    if (!this.authService.getUser() || !this.authService.getUser().roles?.includes('ROLE_ADMIN')) {
+    if (!this.authService.getUser() || !this.authService.getUser()?.roles?.includes('ROLE_ADMIN')) {
       this.router.navigateByUrl('/quizzcards');
     }
   }

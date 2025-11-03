@@ -50,7 +50,7 @@ export class SignUpComponent implements OnInit {
             this.message = 'Inscription réussie! Connection en cours...';
             setTimeout(() => {
               this.auth.initToken(res, 'createcard');
-            }, 2000);
+            }, 1000);
           }
         },
         error: (err) => {

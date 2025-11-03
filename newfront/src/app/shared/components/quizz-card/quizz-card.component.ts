@@ -39,7 +39,6 @@ export class QuizzCardComponent implements OnInit {
 
   fliped = false;
   cardJson = {
-    id: 0,
     domaine: '',
     categorie: '',
     question: '',
@@ -51,14 +50,13 @@ export class QuizzCardComponent implements OnInit {
   };
 
   getCardJson(card: QuizzCard): Object {
-    this.cardJson.id = card.id;
     this.cardJson.domaine = card.domaine;
     this.cardJson.categorie = card.categorie;
     this.cardJson.question = card.question;
     this.cardJson.reponse = card.reponse;
     this.cardJson.explication = card.explication;
     this.cardJson.publication = card.publication;
-    this.cardJson.date = String(card.date);
+    this.cardJson.date = card.date.toISOString();
     this.cardJson.userID = card.userID;
 
     return this.cardJson;
@@ -69,7 +67,7 @@ export class QuizzCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.authService.getUser() && this.authService.getUser().roles.includes('ROLE_ADMIN')) {
+    if (this.authService.getUser()?.roles.includes('ROLE_ADMIN')) {
       this.isAdmin = true;
     }
     
@@ -110,7 +108,7 @@ export class QuizzCardComponent implements OnInit {
       this.quizzCard.publication = 'privee';
     }
 
-    this.quizzcardservice.putCard(this.getCardJson(this.quizzCard)).subscribe();
+    this.quizzcardservice.putCard(this.getCardJson(this.quizzCard) , this.quizzCard.id.toString()).subscribe();
   }
 
   onEdit(): void {
@@ -120,7 +118,8 @@ export class QuizzCardComponent implements OnInit {
 
   onDelete(): void {
     this.quizzcardservice.deleteCard(this.quizzCard.id).subscribe(message => {
-      this.isDeleted = true;
+      this.quizzcardservice.doGetMyCardsRequest()
+      this.fliped = false
     });
   }
 }

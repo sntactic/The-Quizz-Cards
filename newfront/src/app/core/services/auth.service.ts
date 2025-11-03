@@ -14,7 +14,7 @@ import { APP_CONSTANTS } from '../constants/app.constants';
 export class AuthService {
   private token!: string;
   isAuth = false;
-  user!: User;
+  user?: User;
 
   constructor(
     private http: HttpClient,
@@ -41,12 +41,13 @@ export class AuthService {
     return this.token;
   }
 
-  getUser(): User {
+  getUser(): User | undefined{
     return this.user;
   }
 
   onDisonnected(): void {
     this.isAuth = false;
+    this.user = undefined;
     localStorage.removeItem(APP_CONSTANTS.storage.tokenKey);
     this.router.navigateByUrl(APP_CONSTANTS.routes.quizzCards);
   }

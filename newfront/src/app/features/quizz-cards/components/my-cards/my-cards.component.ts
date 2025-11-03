@@ -25,7 +25,7 @@ export class MyCardsComponent implements OnInit {
   quizzCards$!: Observable<QuizzCard[]>;
 
   constructor(
-    private quizzCardService: QuizzCardService,
+    public quizzCardService: QuizzCardService,
     private auth: AuthService,
     private route: ActivatedRoute
   ) {}
@@ -33,19 +33,7 @@ export class MyCardsComponent implements OnInit {
   ngOnInit(): void {
     if (this.auth.isAuth === true) {
       this.quizzCardService.getMyQuizzCardsApi().subscribe(cards => {
-        this.quizzCards = cards.map(card =>
-          new QuizzCard(
-            card.id,
-            card.domaine,
-            card.categorie,
-            card.question,
-            card.reponse,
-            card.explication,
-            card.publication,
-            card.date,
-            card.userID
-          )
-        );
+        this.quizzCards = cards
       });
     }
   }

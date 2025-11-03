@@ -30,9 +30,10 @@ public class CardController {
     cardService.saveCard(card);
   }
 
-  @PutMapping("/cards")
-  public void updateCard(@RequestBody Card card){
-    cardService.saveCard(card);
+  @PutMapping("/cards/{id}")
+  public void updateCard(@RequestBody Card card , @PathVariable("id") final String id){
+     card.setId(id);
+     cardService.saveCard(card);
   }
 
   @DeleteMapping("/cards/{id}")

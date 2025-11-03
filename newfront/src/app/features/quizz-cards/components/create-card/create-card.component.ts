@@ -47,6 +47,9 @@ export class CreateCardComponent implements OnInit {
   ) {}
 
   getCardJson(card: QuizzCard): Object {
+    if (!this.auth.user) {
+      throw new Error("Utilisateur non authentifié !");
+    }
     this.cardJson.domaine = card.domaine;
     this.cardJson.categorie = card.categorie;
     this.cardJson.question = card.question;
@@ -71,7 +74,10 @@ export class CreateCardComponent implements OnInit {
     });
 
     this.quizzForm.valueChanges.pipe(
-      map(formValues =>
+      map(formValues =>{
+        if (!this.auth.user) {
+          throw new Error("Utilisateur non authentifié !");
+        }
         this.card = new QuizzCard(
           0,
           formValues.domaine,
@@ -82,7 +88,7 @@ export class CreateCardComponent implements OnInit {
           'privee',
           new Date(),
           this.auth.user.id
-        )
+        )}
       )
     ).subscribe();
   }

@@ -37,17 +37,20 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmitForm(): void {
-    this.auth.signIn(this.form.value.email, this.form.value.password).subscribe(authRespose => {
-      console.log(authRespose);
-      this.auth.initToken(authRespose.token, 'createcard');
-      if (this.auth.user) {
+    this.auth.signIn(this.form.value.email, this.form.value.password).subscribe({
+      next:(res) =>{
+        this.auth.user
         this.color = 'green';
         this.message = 'connection reusie';
-      } else {
+        setTimeout(() => {
+          this.auth.initToken(res.token, 'createcard');
+        }, 1000);
+      },
+      error :()=>{
         this.color = 'red';
-        this.message = 'la connection a echouee';
+        this.message = 'connection echouée! veillez reessayer.';
       }
-    });
+    })
   }
 }
 

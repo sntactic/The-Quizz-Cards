@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -16,7 +17,7 @@ import { CommonModule } from '@angular/common';
 export class TopbarComponent {
   currentRoute!: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router ,public authService : AuthService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.url;

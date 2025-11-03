@@ -22,12 +22,10 @@ import { AuthService } from '../../../../core/services/auth.service';
 })
 export class EditCardComponent implements OnInit {
   quizzForm!: FormGroup;
-  previewcard$!: Observable<QuizzCard>;
   card!: QuizzCard;
   card$!: Observable<QuizzCard>;
 
   cardJson = {
-    id: 0,
     domaine: '',
     categorie: '',
     question: '',
@@ -46,14 +44,13 @@ export class EditCardComponent implements OnInit {
   ) {}
 
   getCardJson(card: QuizzCard): Object {
-    this.cardJson.id = card.id;
     this.cardJson.domaine = card.domaine;
     this.cardJson.categorie = card.categorie;
     this.cardJson.question = card.question;
     this.cardJson.reponse = card.reponse;
     this.cardJson.explication = card.explication;
     this.cardJson.publication = card.publication;
-    this.cardJson.date = String(card.date);
+    this.cardJson.date = card.date.toISOString();
     this.cardJson.userID = card.userID;
 
     return this.cardJson;
@@ -63,7 +60,6 @@ export class EditCardComponent implements OnInit {
     this.card$ = this.QuizzCardService.cardToEdit$;
 
     this.card$.subscribe(card => this.card = card);
-
     this.quizzForm = this.formBuilder.group({
       domaine: [this.card.domaine, Validators.required],
       difficulte: [this.card.categorie, Validators.required],
@@ -72,7 +68,7 @@ export class EditCardComponent implements OnInit {
       explication: [this.card.explication]
     });
 
-    this.previewcard$ = this.quizzForm.valueChanges.pipe(
+    this.quizzForm.valueChanges.pipe(
       map(formValues =>
         this.card = new QuizzCard(
           this.card.id,
@@ -86,11 +82,11 @@ export class EditCardComponent implements OnInit {
           this.card.userID
         )
       )
-    );
+    ).subscribe();
   }
 
   onSubmitForm(): void {
-    this.QuizzCardService.putCard(this.getCardJson(this.card)).subscribe(message => {
+    this.QuizzCardService.putCard(this.getCardJson(this.card) , this.card.id.toString()).subscribe(message => {
       this.router.navigateByUrl('/mycards');
     });
   }
