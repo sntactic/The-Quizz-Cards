@@ -50,7 +50,7 @@ export class EditCardComponent implements OnInit {
     this.cardJson.reponse = card.reponse;
     this.cardJson.explication = card.explication;
     this.cardJson.publication = card.publication;
-    this.cardJson.date = card.date.toISOString();
+    this.cardJson.date = new Date(card.date).toISOString();
     this.cardJson.userID = card.userID;
 
     return this.cardJson;
