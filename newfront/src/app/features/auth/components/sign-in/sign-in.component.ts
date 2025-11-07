@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { API_CONFIG } from '../../../../config/api.config';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,6 +23,7 @@ export class SignInComponent implements OnInit {
   form!: FormGroup;
   color!: string;
   message!: string;
+  oauth2Route = `${API_CONFIG.baseUrl}/oauth2/authorization/google`
 
   constructor(
     private formBuilder: FormBuilder,

@@ -2,8 +2,8 @@
  * Configuration des endpoints API
  */
 export const API_CONFIG = {
-  baseUrl: 'http://localhost:9000',
-  expressUrl: 'http://localhost:3000',
+  baseUrl: '/api',
+  expressUrl: '/answer',
   endpoints: {
     // Authentication
     signup: '/signup',

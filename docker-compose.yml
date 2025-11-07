@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: front_quizzcards
+    build:
+      context: ./newfront
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+      - "443:443"
+    networks:
+      - quizzcards
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    container_name: back_quizzcards
+    build:
+      context: ./backSpringBoot
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    networks:
+      - quizzcards
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    restart: unless-stopped
+
+networks:
+  quizzcards:
+    driver: bridge
