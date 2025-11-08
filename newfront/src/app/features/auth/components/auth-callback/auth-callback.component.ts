@@ -34,7 +34,7 @@ export class AuthCallbackComponent implements OnInit {
 
         setTimeout(() => {
           this.router.navigateByUrl('/sign/in');
-        }, 3000);
+        }, 1000);
       }
     });
   }
