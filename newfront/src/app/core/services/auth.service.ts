@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { User } from '../../shared/models/user.model';
@@ -18,7 +18,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private route : ActivatedRoute
   ) {}
 
   signUp(user: Object): Observable<string> {
@@ -64,7 +65,9 @@ export class AuthService {
     );
     this.user = newUser;
     this.isAuth = true;
-    this.router.navigateByUrl(route);
+    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || route;
+    sessionStorage.removeItem('returnUrl');
+    this.router.navigateByUrl(returnUrl);
   }
 }
 

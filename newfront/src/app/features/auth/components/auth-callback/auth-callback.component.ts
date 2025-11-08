@@ -25,7 +25,8 @@ export class AuthCallbackComponent implements OnInit {
       const token = params['token'];
 
       if (token) {
-        this.authService.initToken(token, 'createcard');
+        const returnUrl : string = sessionStorage.getItem('returnUrl') || 'createcard';
+        this.authService.initToken(token, returnUrl);
       } else {
         this.loading = false;
         this.error = true;
