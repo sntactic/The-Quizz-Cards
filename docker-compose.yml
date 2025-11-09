@@ -1,6 +1,16 @@
-version: '3.8'
 
 services:
+  database:
+    image: mongo:7.0
+    container_name: mongodb_quizzcards
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: quizzcards
+      MONGO_INITDB_ROOT_PASSWORD: KHmb#2494QuizzCards
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - quizzcards
+
   frontend:
     container_name: front_quizzcards
     build:
@@ -24,6 +34,8 @@ services:
       - "9000:9000"
     networks:
       - quizzcards
+    depends_on:
+      - database
     environment:
       - SPRING_PROFILES_ACTIVE=prod
     restart: unless-stopped
@@ -31,3 +43,6 @@ services:
 networks:
   quizzcards:
     driver: bridge
+
+volumes:
+  mongo-data:

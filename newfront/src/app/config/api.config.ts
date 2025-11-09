@@ -3,7 +3,6 @@
  */
 export const API_CONFIG = {
   baseUrl: '/api',
-  expressUrl: '/answer',
   endpoints: {
     // Authentication
     signup: '/signup',

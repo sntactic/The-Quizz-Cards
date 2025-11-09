@@ -51,11 +51,16 @@ export class QuizzCardService {
     ).subscribe(cards => this.cardListSubject.next(cards));
   };
 
-  getAnswer(question: string): Observable<any> {
-    return this.http.post(`${API_CONFIG.expressUrl}${API_CONFIG.endpoints.answer}`, { question });
+  getAnswer(question: string): Observable<string> {
+    console.log(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.answer}`)
+    return this.http.post(
+      `${API_CONFIG.baseUrl}${API_CONFIG.endpoints.answer}`,
+      { question },
+      {responseType: 'text' } );
   }
 
   getQuizzCardsApi(): Observable<QuizzCard[]> {
+    console.log(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.allCards}`)
     return this.http.get<QuizzCard[]>(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.allCards}`);
   }
 

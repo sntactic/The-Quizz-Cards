@@ -101,8 +101,8 @@ export class CreateCardComponent implements OnInit {
 
   onReponse(): void {
     this.QuizzCardService.getAnswer(this.quizzForm.value.question).subscribe(res => {
-      console.log(res.answer);
-      this.quizzForm.get('reponse')?.setValue(res.answer);
+      console.log(res);
+      this.quizzForm.get('reponse')?.setValue(res);
     });
   }
 }

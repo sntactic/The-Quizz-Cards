@@ -18,7 +18,7 @@ export class SignUpComponent implements OnInit {
   form!: FormGroup;
   message!: string;
   color!: string;
-  oauth2Route = `${API_CONFIG.baseUrl}:9000/oauth2/authorization/google`
+  oauth2Route = `${API_CONFIG.baseUrl}/oauth2/authorization/google`
   
   ifmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
