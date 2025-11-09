@@ -17,8 +17,8 @@ services:
       context: ./newfront
       dockerfile: Dockerfile
     ports:
-      - "4200:80"
-      - "443:443"
+      - "80:80"
+      #- "443:443"
     networks:
       - quizzcards
     depends_on:
