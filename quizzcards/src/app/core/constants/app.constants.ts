@@ -27,7 +27,9 @@ export const APP_CONSTANTS = {
     medecine: 'medecine',
     botanique: 'botanique',
     histoire: 'histoire',
-    animale: 'animale'
+    animale: 'animale',
+    litterature : "litterature",
+    generale : "generale"
   },
   publication: {
     publique: 'publique',

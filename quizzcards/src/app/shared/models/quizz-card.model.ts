@@ -64,6 +64,12 @@ export class QuizzCard {
       case 'animale':
         this.imageUrl = 'assets/zoo.jpeg';
         break;
+      case 'generale':
+        this.imageUrl = 'assets/generale.jpeg';
+        break;
+      case 'litterature':
+        this.imageUrl = 'assets/litterature.jpg';
+        break;
     }
   }
 
