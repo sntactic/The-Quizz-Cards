@@ -14,7 +14,7 @@ services:
   frontend:
     container_name: front_quizzcards
     build:
-      context: ./newfront
+      context: ./quizzcards
       dockerfile: Dockerfile
     ports:
       - "80:80"
