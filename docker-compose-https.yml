@@ -1,0 +1,84 @@
+version: '3'
+
+services:
+  # -------------------- Reverse Proxy & Let's Encrypt --------------------
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx_proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs:rw
+      - ./vhost.d:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+
+  letsencrypt:
+    image: nginxproxy/acme-companion
+    container_name: nginx_letsencrypt
+    restart: unless-stopped
+    environment:
+      NGINX_PROXY_CONTAINER: nginx_proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./certs:/etc/nginx/certs:rw
+      - ./vhost.d:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+
+  # -------------------- MongoDB --------------------
+  database:
+    image: mongo:7.0
+    container_name: mongodb_quizzcards
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: quizzcards
+      MONGO_INITDB_ROOT_PASSWORD: KHmb#2494QuizzCards
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - quizzcards
+
+  # -------------------- Backend Spring Boot --------------------
+  backend:
+    container_name: back_quizzcards
+    build:
+      context: ./backSpringBoot
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    networks:
+      - quizzcards
+    depends_on:
+      - database
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      IP_HOST: 209.74.83.94
+      CALL_BACK_URL: https://quizzcards.info:9000/login/oauth2/code/google
+    env_file:
+      - .env
+    restart: unless-stopped
+
+  # -------------------- Frontend Angular --------------------
+  frontend:
+    container_name: front_quizzcards
+    build:
+      context: ./quizzcards
+      dockerfile: Dockerfile
+    networks:
+      - quizzcards
+    depends_on:
+      - backend
+    restart: unless-stopped
+    environment:
+      VIRTUAL_HOST: quizzcards.info,www.quizzcards.info
+      LETSENCRYPT_HOST: quizzcards.info,www.quizzcards.info
+      LETSENCRYPT_EMAIL: ton-email@example.com
+
+# -------------------- Networks & Volumes --------------------
+networks:
+  quizzcards:
+    driver: bridge
+
+volumes:
+  mongo-data:
