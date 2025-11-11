@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 export class QuestionDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<QuestionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { question: string }
+    @Inject(MAT_DIALOG_DATA) public data: { texte: string }
   ) {}
 
   closeDialog(): void {

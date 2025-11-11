@@ -39,6 +39,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - IP_HOST=192.168.1.3
+      - CALL_BACK_URL=http://localhost:9000/login/oauth2/code/google
     env_file:
       - .env
     restart: unless-stopped

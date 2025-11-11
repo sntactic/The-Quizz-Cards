@@ -42,23 +42,32 @@
         class="w-full h-48 object-cover rounded-lg mb-4 cursor-pointer hover:opacity-90 transition-opacity"/>
       
       <!-- Question -->
-      <div class="text-lg font-semibold mb-4 text-gray-800 min-h-[3rem] flex flex-col items-center justify-center">
-        <p class="text-center mb-2">{{ isQuestionLong ? truncatedQuestion : quizzCard.question }}
-        <button 
-          *ngIf="isQuestionLong"
-          type="button"
-          (click)="openQuestionDialog($event)"
-          (mousedown)="$event.stopPropagation()"
-          class="text-2xl text-blue-500 hover:text-blue-600 font-normal mt-1 transition-colors cursor-pointer z-10 relative">
-          ...
-        </button>
+      <div class="text-base font-semibold mb-4 text-gray-800 min-h-[3rem] flex flex-col items-center justify-center">
+        <p class="text-center mb-2">{{ isQuestionLong? question : quizzCard.question }}
+          <button 
+            *ngIf="isQuestionLong"
+            type="button"
+            (click)="openDialog(quizzCard.question , $event)"
+            (mousedown)="$event.stopPropagation()"
+            class="text-2xl text-blue-500 hover:text-blue-600 font-normal mt-1 transition-colors cursor-pointer z-10 relative">
+            ...<span class="text-xs">plus</span>
+          </button>
         </p>
       </div>
       
       <!-- Answer -->
       <div class="mb-4">
         @if (quizzCard.reponse_vue === true) {
-          <p class="text-green-600 font-medium text-lg">{{quizzCard.reponse}}</p>
+          <p class="text-green-600 font-medium text-base">{{isAnswerLong? answer : quizzCard.reponse}}
+            <button 
+              *ngIf="isAnswerLong"
+              type="button"
+              (click)="openDialog(quizzCard.reponse , $event)"
+              (mousedown)="$event.stopPropagation()"
+              class="text-2xl text-blue-500 hover:text-blue-600 font-normal mt-1 transition-colors cursor-pointer z-10 relative">
+              ...<span class="text-xs">plus</span>
+            </button>
+          </p>
         } @else {
           <p class="text-gray-400 text-lg font-semibold">???</p>
         }
