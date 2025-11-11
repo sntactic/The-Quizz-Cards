@@ -1,0 +1,102 @@
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 15px gray;
+    border-radius: 10px;
+    background: linear-gradient(blue, red);
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.body{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+select{
+    width: 20vw;
+    font-size: 2vw;
+}
+
+
+label{
+    font-size: 2vw;
+    color: white;
+}
+
+textarea{
+    border-radius: 6px;
+    font-size: 2vw;
+}
+
+button{
+    width: 150px;
+    font-size: 20px;
+    color: white;
+    background-color: blue;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.catdiff{
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+@media screen and (max-width:850px) {
+    .catdiff{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    select{
+        width: 70vw;
+        font-size: 2vw;
+        height: 20px;
+    }
+
+    label{
+        font-size: 4vw;
+    }
+
+    textarea{
+        border-radius: 6px;
+        font-size: 3vw;
+    }
+
+    .main{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0px;
+        margin-right: 0px;
+        box-shadow: 0px 0px 15px gray;
+        border-radius: 10px;
+        background: linear-gradient(blue, red);
+    }
+}
+
+.cards{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

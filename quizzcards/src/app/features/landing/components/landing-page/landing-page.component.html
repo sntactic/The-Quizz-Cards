@@ -1,0 +1,51 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800">
+  <app-header/>
+  
+  <!-- Hero Section -->
+  <div class="flex flex-col items-center justify-center min-h-screen px-4 py-20">
+    <!-- Logo Section -->
+    <div class="flex items-center justify-center space-x-4 mb-8 animate-fade-in">
+      <img class="h-24 w-24 md:h-32 md:w-32 rounded-xl shadow-2xl object-cover" src="assets/app_logo.jpeg" alt="Logo"/>
+      <div class="text-white text-2xl md:text-3xl font-bold">by</div>
+      <img class="h-24 w-24 md:h-32 md:w-32 rounded-xl shadow-2xl object-cover" src="assets/mon_logo.jpeg" alt="Logo"/>
+    </div>
+
+    <!-- Main Message -->
+    <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 md:p-12 mb-12 text-center shadow-2xl max-w-4xl">
+      <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+        AMÉLIORER SA CULTURE GÉNÉRALE<br/>EN S'AMUSANT
+      </h1>
+      <p class="text-xl md:text-2xl text-blue-100 mb-8">
+        Créez, partagez et apprenez avec des cartes de quiz interactives
+      </p>
+    </div>
+
+    <!-- CTA Button -->
+    <div appAnimateOnVisible="animate-fade-in">
+      <a
+        routerLink="quizzcards"
+        class="inline-block px-8 py-4 bg-white text-blue-600 text-xl font-bold rounded-xl shadow-2xl hover:bg-blue-50 transform hover:scale-105 transition-all duration-200">
+        🚀 Commencer
+      </a>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full">
+      <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center text-white" appAnimateOnVisible="animate-slide-in">
+        <div class="text-4xl mb-4">📚</div>
+        <h3 class="text-xl font-bold mb-2">Des milliers de cartes</h3>
+        <p class="text-blue-100">Explorez une vaste collection de questions</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center text-white " appAnimateOnVisible="animate-slide-in">
+        <div class="text-4xl mb-4">✨</div>
+        <h3 class="text-xl font-bold mb-2">Créez facilement</h3>
+        <p class="text-blue-100">Générez vos propres cartes en quelques clics</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center text-white" appAnimateOnVisible="animate-slide-in">
+        <div class="text-4xl mb-4">🎯</div>
+        <h3 class="text-xl font-bold mb-2">Apprendre efficacement</h3>
+        <p class="text-blue-100">Mémorisez mieux avec le système de quiz</p>
+      </div>
+    </div>
+  </div>
+</div>

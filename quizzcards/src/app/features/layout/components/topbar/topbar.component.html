@@ -1,0 +1,35 @@
+<div class="fixed top-16 left-0 right-0 bg-white shadow-md z-30 hidden md:block">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="flex items-center justify-center space-x-4 h-14">
+      <a 
+        routerLink="quizzcards" 
+        routerLinkActive="bg-green-500 text-white"
+        [routerLinkActiveOptions]="{exact:true}"
+        class="px-6 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+        QuizzCards
+      </a>
+      <a 
+        routerLink="createcard" 
+        routerLinkActive="bg-blue-500 text-white"
+        [routerLinkActiveOptions]="{exact:true}"
+        class="px-6 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+        Créer une carte
+      </a>
+      <a 
+        routerLink="mycards" 
+        routerLinkActive="bg-red-500 text-white"
+        [routerLinkActiveOptions]="{exact:true}"
+        class="px-6 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+        Mes cartes
+      </a>
+      <a 
+        *ngIf="authService.getUser()?.isAdmin()"
+        routerLink="adminpage" 
+        routerLinkActive="bg-purple-500 text-white"
+        [routerLinkActiveOptions]="{exact:true}"
+        class="px-6 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+        admin
+      </a>
+    </nav>
+  </div>
+</div>

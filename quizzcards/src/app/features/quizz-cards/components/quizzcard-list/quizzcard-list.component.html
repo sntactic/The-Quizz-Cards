@@ -1,0 +1,55 @@
+<!-- Filter Toolbar -->
+<div class="fixed  md:top-110 left-0 right-0 bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg z-20 py-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <!-- Domain Filter -->
+      <div class="flex items-center space-x-3">
+        <label class="text-white font-semibold text-sm">Filtrer par thème:</label>
+        <select 
+          (change)="setDomaine($any($event.target).value)"
+          class="px-5 py-2 rounded-lg border border-white/30 bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all backdrop-blur-sm">
+          <option value="aléatoire" class="text-gray-800">Aléatoire</option>
+          <option value="science et technologie" class="text-gray-800">Science et technologie</option>
+          <option value="geographie" class="text-gray-800">Géographie</option>
+          <option value="medecine" class="text-gray-800">Médecine</option>
+          <option value="botanique" class="text-gray-800">Botanique</option>
+          <option value="histoire" class="text-gray-800">Histoire</option>
+          <option value="zoo" class="text-gray-800">Animale</option>
+        </select>
+      </div>
+
+      <!-- Difficulty Filter -->
+      <div class="flex items-center space-x-5">
+        <label class="text-white font-semibold text-sm">Filtrer par difficulté:</label>
+        <select 
+          (change)="setDifficulte($any($event.target).value)"
+          class="px-16 py-2 rounded-lg border border-white/30 bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all backdrop-blur-sm">
+          <option value="aléatoire" class="text-gray-800">Aléatoire</option>
+          <option value="facile" class="text-gray-800">Facile</option>
+          <option value="moyenne" class="text-gray-800">Moyenne</option>
+          <option value="difficile" class="text-gray-800">Difficile</option>
+          <option value="expert" class="text-gray-800">Expert</option>
+          <option value="génie" class="text-gray-800">Génie</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cards Grid -->
+<div class="pt-40 md:pt-32 pb-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (quizzCard of quizzCards; track $index) {
+        <app-quizz-card appAnimateOnVisible="animate-fade-in"
+          *ngIf="(quizzCard.categorie===difficulte || difficulte==='aléatoire') && (quizzCard.domaine===domaine || domaine==='aléatoire')"
+          [quizzCard]="quizzCard" />
+      }
+    </div>
+    
+    <!-- Empty State -->
+    <div *ngIf="quizzCardLsength === 0" class="text-center py-20">
+      <div class="text-gray-400 text-xl">Aucune carte disponible</div>
+    </div>
+  </div>
+</div>
