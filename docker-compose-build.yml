@@ -1,8 +1,11 @@
 
 services:
   database:
+    image: mongo:7.0
     container_name: mongodb_quizzcards
-    image: snkhadim/quizzcards-database
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: quizzcards
+      MONGO_INITDB_ROOT_PASSWORD: KHmb#2494QuizzCards
     volumes:
       - mongo-data:/data/db
     networks:
@@ -10,7 +13,9 @@ services:
 
   frontend:
     container_name: front_quizzcards
-    image: snkhadim/quizzcards-frontend
+    build:
+      context: ./quizzcards
+      dockerfile: Dockerfile
     ports:
       - "80:80"
       #- "443:443"
@@ -22,7 +27,9 @@ services:
 
   backend:
     container_name: back_quizzcards
-    image: snkhadim/quizzcards-backend
+    build:
+      context: ./backSpringBoot
+      dockerfile: Dockerfile
     ports:
       - "9000:9000"
     networks:
@@ -31,8 +38,10 @@ services:
       - database
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-      - IP_HOST=209.74.83.94
+      - IP_HOST=quizzcards.info
       - CALL_BACK_URL=http://quizzcards.info:9000/login/oauth2/code/google
+    env_file:
+      - .env
     restart: unless-stopped
 
 networks:
