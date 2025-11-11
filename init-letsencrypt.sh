@@ -9,10 +9,10 @@ mkdir -p "./certbot/conf"
 mkdir -p "./certbot/www"
 
 echo "### Démarrage de nginx..."
-docker-compose up -d frontend
+docker compose up -d frontend
 
 echo "### Demande de certificat Let's Encrypt..."
-docker-compose run --rm certbot certonly --webroot \
+docker compose run --rm certbot certonly --webroot \
   -w /var/www/certbot \
   --email $email \
   -d quizzcards.info \
@@ -23,6 +23,6 @@ docker-compose run --rm certbot certonly --webroot \
   $(if [ $staging != "0" ]; then echo "--staging"; fi)
 
 echo "### Redémarrage de nginx..."
-docker-compose restart frontend
+docker compose restart frontend
 
 echo "### Terminé !"
