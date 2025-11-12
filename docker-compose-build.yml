@@ -3,6 +3,7 @@ services:
   database:
     image: mongo:7.0
     container_name: mongodb_quizzcards
+    platform: linux/amd64
     environment:
       MONGO_INITDB_ROOT_USERNAME: quizzcards
       MONGO_INITDB_ROOT_PASSWORD: KHmb#2494QuizzCards
@@ -16,6 +17,7 @@ services:
     build:
       context: ./quizzcards
       dockerfile: Dockerfile
+    platform: linux/amd64
     ports:
       - "80:80"
       #- "443:443"
@@ -30,6 +32,7 @@ services:
     build:
       context: ./backSpringBoot
       dockerfile: Dockerfile
+    platform: linux/amd64
     ports:
       - "9000:9000"
     networks:
