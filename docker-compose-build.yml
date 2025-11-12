@@ -1,7 +1,9 @@
 
 services:
   database:
-    image: mongo:7.0
+    build:
+      context: ./database
+      dockerfile: Dockerfile
     container_name: mongodb_quizzcards
     platform: linux/amd64
     environment:
