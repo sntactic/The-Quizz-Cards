@@ -13,9 +13,11 @@ services:
     image: snkhadim/quizzcards-frontend
     ports:
       - "80:80"
-      #- "443:443"
+      - "443:443"
     networks:
       - quizzcards
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - backend
     restart: unless-stopped
@@ -31,7 +33,7 @@ services:
       - database
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-      - IP_HOST=209.74.83.94
+      - IP_HOST=quizzcards.info
       - CALL_BACK_URL=http://quizzcards.info:9000/login/oauth2/code/google
     restart: unless-stopped
 
