@@ -68,7 +68,7 @@ export class QuizzCard {
         this.imageUrl = 'assets/generale.jpeg';
         break;
       case 'litterature':
-        this.imageUrl = 'assets/litterature.jpg';
+        this.imageUrl = 'assets/litterature.jpeg';
         break;
     }
   }
