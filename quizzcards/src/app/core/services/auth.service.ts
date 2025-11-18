@@ -38,6 +38,14 @@ export class AuthService {
     );
   }
 
+  sendNotif(email: string, usermane: string): Observable<string> {
+    return this.http.post<string>(
+      `${API_CONFIG.endpoints.notif}/webhook/539ef4fa-8eab-4cf4-b19d-06566201a8f7`,
+      { email: email, usermane: usermane },
+      { responseType: 'text' as 'json' }
+    );
+  }
+
   getToken(): string {
     return this.token;
   }

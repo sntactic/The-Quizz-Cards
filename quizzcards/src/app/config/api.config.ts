@@ -7,6 +7,9 @@ export const API_CONFIG = {
     // Authentication
     signup: '/signup',
     login: '/login',
+
+    //notification
+    notif: '/n8n',
     
     // Quizz Cards
     allCards: '/allcards',

@@ -36,7 +36,6 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmitForm(): void {
-    console.log(this.form.value);
     if (this.ifmail(this.form.value.email) === false) {
       this.color = 'red';
       this.message = 'email invalide!';
@@ -50,6 +49,7 @@ export class SignUpComponent implements OnInit {
           } else {
             this.color = 'green';
             this.message = 'Inscription réussie! Connection en cours...';
+            this.auth.sendNotif(this.form.value.email , this.form.value.name).subscribe();
             setTimeout(() => {
               this.auth.initToken(res, 'createcard');
             }, 1000);

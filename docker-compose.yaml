@@ -1,10 +1,25 @@
-
 services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+      - N8N_SECURE_COOKIE=false
+    volumes:
+      - ../n8n/n8n_data:/home/node/.n8n
+    networks:
+      - quizzcards
+
   database:
     container_name: mongodb_quizzcards
-    image: snkhadim/quizzcards-database
+    image: mongo:7.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: quizzcards
+      MONGO_INITDB_ROOT_PASSWORD: KHmb#2494QuizzCards
     volumes:
-      - mongo-data:/data/db
+      - the-quizz-cards_mongo-data:/data/db
     networks:
       - quizzcards
 
@@ -42,4 +57,5 @@ networks:
     driver: bridge
 
 volumes:
-  mongo-data:
+  the-quizz-cards_mongo-data:
+    external: true
