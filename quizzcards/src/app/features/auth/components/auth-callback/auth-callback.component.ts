@@ -27,6 +27,8 @@ export class AuthCallbackComponent implements OnInit {
       if (token) {
         const returnUrl : string = sessionStorage.getItem('returnUrl') || 'createcard';
         this.authService.initToken(token, returnUrl);
+        if(this.authService.user)
+          this.authService.sendNotif(this.authService.user.email, this.authService.user.name)
       } else {
         this.loading = false;
         this.error = true;
