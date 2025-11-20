@@ -1,6 +1,7 @@
 package com.mongoApp.quizzcards.service;
 
 import com.mongoApp.quizzcards.dto.CustomUserDetails;
+import com.mongoApp.quizzcards.dto.NotifBody;
 import com.mongoApp.quizzcards.model.User;
 import com.mongoApp.quizzcards.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,11 +24,17 @@ public class OAuth2LoginSuccessService implements AuthenticationSuccessHandler {
     @Value ("${IP_HOST}")
     private String ipHost;
 
-  @Autowired
-  private JWTService jwtService;
+    private final JWTService jwtService;
+    private final UserRepository userRepository;
+    private final SendNotifService sendNotifService;
 
-  @Autowired
-  private UserRepository userRepository;
+    public OAuth2LoginSuccessService(JWTService jwtService,
+                                     UserRepository userRepository,
+                                     SendNotifService sendNotifService) {
+        this.jwtService = jwtService;
+        this.userRepository = userRepository;
+        this.sendNotifService = sendNotifService;
+    }
 
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request,
@@ -41,11 +48,16 @@ public class OAuth2LoginSuccessService implements AuthenticationSuccessHandler {
 
     User user = userRepository.findByEmail(mail);
     if (user == null) {
-      user = new User();
-      user.setEmail(mail);
-      user.setName(name);
-      user.setRole("USER");
-      userRepository.save(user);
+        user = new User();
+        user.setEmail(mail);
+        user.setName(name);
+        user.setRole("USER");
+        userRepository.save(user);
+        sendNotifService.sendNotif(new NotifBody(user.getEmail(), user.getName()))
+            .subscribe(
+                    result -> System.out.println("Notification envoyée: " + result),
+                    error -> System.err.println("Erreur notification: " + error.getMessage())
+            );
     }
 
 
